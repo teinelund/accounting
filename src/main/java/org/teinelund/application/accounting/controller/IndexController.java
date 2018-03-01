@@ -8,7 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
     @RequestMapping("/")
-    public String hello(Model model) {
+    public String defaultPaget(Model model) {
+        return "index";
+    }
+
+    @RequestMapping("/index")
+    public String index(Model model) {
         return "index";
     }
 }
