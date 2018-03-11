@@ -14,4 +14,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/login").setViewName("auth/login");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
+
+    //@Bean(name = "dataSource")
+    //public DriverManagerDataSource dataSource() {
+    //    DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+    //    driverManagerDataSource.setDriverClassName("com.postgresql.Driver");
+    //    driverManagerDataSource.setUrl("jdbc:postgresgl://localhost:5432/accounting");
+    //    driverManagerDataSource.setUsername("henrik");
+    //    driverManagerDataSource.setPassword("hlPyYz9r");
+    //    return driverManagerDataSource;
+    //}
 }
