@@ -8,6 +8,7 @@ import org.teinelund.application.accounting.entities.UserRoleEntity;
 import org.teinelund.application.accounting.model.User;
 import org.teinelund.application.accounting.repository.AccRoleRepository;
 import org.teinelund.application.accounting.repository.AccUserRepository;
+import org.teinelund.application.accounting.repository.UserRoleRepository;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -21,18 +22,23 @@ public class RegisterService {
     @Autowired
     private AccRoleRepository accRoleRepository;
 
+    @Autowired
+    private UserRoleRepository userRoleRepository;
+
     public boolean registerUser(User user) {
         AccUserEntity accUser = new AccUserEntity();
         accUser.setUserName(user.getUsername());
         accUser.setPassword(user.getPassword());
+        accUser.setEnabled(1);
         Collection<UserRoleEntity> userRoles = new LinkedList<>();
-        AccRoleEntity role = accRoleRepository.getOne(1L);
+        AccRoleEntity accRole = accRoleRepository.getOne(2L);
         UserRoleEntity userRole = new UserRoleEntity();
-        userRole.setAccRoleByRoleId(role);
+        userRole.setAccRoleByRoleId(accRole);
         userRole.setAccUserByUserId(accUser);
         userRoles.add(userRole);
         accUser.setUserRolesByUserId(userRoles);
         accUserRepository.save(accUser);
+        userRoleRepository.save(userRole);
         return true;
     }
 }

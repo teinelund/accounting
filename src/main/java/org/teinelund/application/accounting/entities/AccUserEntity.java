@@ -15,7 +15,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "acc_user", schema = "public", catalog = "accounting")
 public class AccUserEntity {
-    private long userId;
+    private Long userId;
     private String userName;
     private String password;
     private int enabled;
@@ -23,13 +23,13 @@ public class AccUserEntity {
 
     @Id
     @Column(name = "user_id")
-    @SequenceGenerator(name="acc_user_seq_id", sequenceName="acc_user_seq")
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="acc_user_seq_id")
-    public long getUserId() {
+    @SequenceGenerator(name="acc_user_seq", sequenceName="acc_user_user_id_seq")
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="acc_user_seq")
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
