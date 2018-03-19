@@ -58,14 +58,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user").password("u").roles("USER")
-                .and()
-                .withUser("manager").password("m").roles("ADMIN");
-        //auth.jdbcAuthentication().dataSource(dataSource)
-        //        .usersByUsernameQuery(
-        //                "select username,password, enabled from users where username=?")
-        //        .authoritiesByUsernameQuery(
-        //                "select username, role from user_roles where username=?");
+        //auth.inMemoryAuthentication()
+        //        .withUser("user").password("u").roles("USER")
+        //        .and()
+        //        .withUser("manager").password("m").roles("ADMIN");
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .usersByUsernameQuery(
+                        "select user_name, password, enabled from acc_user where user_name=?")
+                .authoritiesByUsernameQuery(
+                        "select user_name, role_name from acc_user, user_role, acc_role where acc_user.user_name=? and acc_user.user_id=user_role.user_id and user_role.role_id=acc_role.role_id");
     }
 }
