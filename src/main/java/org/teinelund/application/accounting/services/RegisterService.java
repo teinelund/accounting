@@ -1,6 +1,7 @@
 package org.teinelund.application.accounting.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.teinelund.application.accounting.entities.AccRoleEntity;
 import org.teinelund.application.accounting.entities.AccUserEntity;
@@ -28,7 +29,9 @@ public class RegisterService {
     public boolean registerUser(User user) {
         AccUserEntity accUser = new AccUserEntity();
         accUser.setUserName(user.getUsername());
-        accUser.setPassword(user.getPassword());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
+        accUser.setPassword(hashedPassword);
         accUser.setEnabled(1);
         Collection<UserRoleEntity> userRoles = new LinkedList<>();
         AccRoleEntity accRole = accRoleRepository.getOne(2L);
