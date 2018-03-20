@@ -1,37 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/security/tags">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="../static/css/accounting.css" th:href="@{/css/accounting.css}"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css' />
-    <link href='https://fonts.googleapis.com/css?family=Exo' rel='stylesheet' type='text/css' />
+    <div th:replace="fragments/header :: header-css"/>
     <title>Budget</title>
 </head>
 <body>
 
+    <div th:replace="fragments/header :: header"/>
+
     <div class="container">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <div class="navbar-text navbar-right">
-                        Welcome <span sec:authentication="name">Guest</span> |
-                        <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">
-                            <a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logout</a>
-                        </form>
-                        <a sec:authorize="!isAuthenticated()" th:href="@{/invoice/list}"> Login</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
+
 
         <h1 th:text="#{index.header}">TITLE</h1>
         <p th:text="#{index.text}">WELLCOME_TEXT</p>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" ></script>
+    <div th:replace="fragments/footer :: footer"/>
 
 </body>
 </html>

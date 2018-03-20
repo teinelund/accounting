@@ -31,7 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/css/**",
                         "/img/**").permitAll();
 
-        http.authorizeRequests().antMatchers("/list").access("hasAnyRole('USER', 'ADMIN')");
+        http.authorizeRequests().antMatchers("/invoice/**").authenticated();
+        //http.authorizeRequests().antMatchers("/invoice/**").access("hasAnyRole('USER', 'ADMIN')");
+        //http.authorizeRequests().antMatchers("/invoice/**").hasAnyRole("USER", "ADMIN");
 
         http.authorizeRequests().and().formLogin()
                 .loginPage("/login")
@@ -39,7 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login?logout")
+                //.logoutSuccessUrl("/auth/login?logout")
+                .logoutSuccessUrl("/index")
                 .permitAll();
     }
 
