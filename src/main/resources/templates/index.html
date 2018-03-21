@@ -13,6 +13,10 @@
     <div class="container">
 
 
+        <div th:if="${registeredUser}" class="alert alert-success">
+            You have successfully created an account. Please, now login.
+        </div>
+
         <h1 th:text="#{index.header}">TITLE</h1>
         <p th:text="#{index.text}">WELLCOME_TEXT</p>
     </div>

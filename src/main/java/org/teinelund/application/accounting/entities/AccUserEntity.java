@@ -1,5 +1,8 @@
 package org.teinelund.application.accounting.entities;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +17,9 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "acc_user", schema = "public", catalog = "accounting")
+@NamedQueries({
+        @NamedQuery(name = "AccUserEntity.findByUserName", query = "SELECT a FROM AccUserEntity a WHERE a.userName = :userName")
+})
 public class AccUserEntity {
     private Long userId;
     private String userName;

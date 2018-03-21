@@ -19,7 +19,7 @@
 
                         <form name="f" th:action="@{/addUser}" th:object="${user}" method="post">
                             <h2 class="form-signin-heading">Register</h2>
-                            <div th:if="${param.error}" class="alert alert-danger">
+                            <div th:if="${error}" class="alert alert-danger">
                                 Username alredy exist.
                             </div>
                             <div class="form-group">

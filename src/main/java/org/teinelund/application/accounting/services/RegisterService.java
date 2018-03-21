@@ -17,6 +17,8 @@ import java.util.LinkedList;
 @Service
 public class RegisterService {
 
+    private final long ROLE_USER = 2L;
+
     @Autowired
     private AccUserRepository accUserRepository;
 
@@ -27,14 +29,18 @@ public class RegisterService {
     private UserRoleRepository userRoleRepository;
 
     public boolean registerUser(User user) {
-        AccUserEntity accUser = new AccUserEntity();
+        AccUserEntity accUser = accUserRepository.getAccUserEntityForUserName(user.getUsername());
+        if (accUser != null) {
+            return false;
+        }
+        accUser = new AccUserEntity();
         accUser.setUserName(user.getUsername());
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(user.getPassword());
         accUser.setPassword(hashedPassword);
         accUser.setEnabled(1);
         Collection<UserRoleEntity> userRoles = new LinkedList<>();
-        AccRoleEntity accRole = accRoleRepository.getOne(2L);
+        AccRoleEntity accRole = accRoleRepository.getOne(ROLE_USER);
         UserRoleEntity userRole = new UserRoleEntity();
         userRole.setAccRoleByRoleId(accRole);
         userRole.setAccUserByUserId(accUser);
