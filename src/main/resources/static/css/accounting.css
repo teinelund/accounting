@@ -24,3 +24,11 @@ footer p {
 #index-alert-success {
     margin-top: 50px;
 }
+
+.header-btn {
+    margin-left: 20px;
+}
+
+#header-username {
+    margin-left: 10px;
+}

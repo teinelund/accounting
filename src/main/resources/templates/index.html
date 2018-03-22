@@ -4,7 +4,7 @@
       xmlns:sec="http://www.springframework.org/security/tags">
 <head>
     <div th:replace="fragments/header :: header-css"/>
-    <title>Budget</title>
+    <title th:text="#{page.title}">TEXT_TITLE</title>
 </head>
 <body>
 
@@ -13,8 +13,8 @@
     <div class="container">
 
 
-        <div th:if="${registeredUser}" class="alert alert-success" id="index-alert-success">
-            You have successfully created an account. Please, now login.
+        <div th:if="${registeredUser}" class="alert alert-success" id="index-alert-success" th:text="#{index.registered}">
+            YOU_HAVE_CREATE_AN_ACCOUNT
         </div>
 
         <h1 th:text="#{index.header}">TITLE</h1>

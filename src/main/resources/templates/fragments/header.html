@@ -14,7 +14,7 @@
 <div th:fragment="header">
     <!-- this is header -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <span class="navbar-brand" href="#">TEXT</span>
+        <span class="navbar-brand" href="#" th:text="#{header.header}">TEXT</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,21 +22,21 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" th:href="@{/}" th:text="#{header.home}">HOME<!--<span class="sr-only">(current)</span> --></a>
                 </li>
                 <li class="nav-item" sec:authorize="isAnonymous()" >
-                    <a class="nav-link" th:href="@{/login}">Login</a>
+                    <a class="btn btn-secondary header-btn" th:href="@{/login}" role="button" th:text="#{header.login}">LOGIN</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAnonymous()">
-                    <a class="nav-link" th:href="@{/register}">Create a new Account</a>
+                    <a class="btn btn-secondary header-btn" th:href="@{/register}" role="button" th:text="#{header.new-account}">NEW_ACCOUNT</a> <!-- class="nav-link" -->
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
                     <form class="form-inline" th:action="@{/logout}" method="post">
-                        <input class="btn btn-secondary" type="submit" value="Logout"/>
+                        <input class="btn btn-secondary header-btn" type="submit" value="LOGOUT" th:value="#{header.logout}"/>
                     </form>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <span class="navbar-text">User: <span sec:authentication="principal.username">ADA</span></span>
+                    <span class="navbar-text" th:text="#{header.user}">USER</span><span class="navbar-text" id="header-username" sec:authentication="principal.username">ADA</span>
                 </li>
             </ul>
         </div>
