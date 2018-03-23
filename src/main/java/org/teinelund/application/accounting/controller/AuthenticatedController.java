@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/invoice")
 public class AuthenticatedController {
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String hello(Model model) {
-        return "invoice/list";
+    @RequestMapping(value = "/start", method = RequestMethod.GET)
+    public String start(Model model) {
+        return "invoice/start";
     }
 }

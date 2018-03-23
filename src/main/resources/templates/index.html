@@ -19,6 +19,10 @@
 
         <h1 th:text="#{index.header}">TITLE</h1>
         <p th:text="#{index.text}">WELLCOME_TEXT</p>
+        <div sec:authorize="isAuthenticated()">
+            <p th:text="#{index.go-to-start}">GO_TO_START</p>
+            <a th:href="@{/invoice/start}" th:text="#{index.link-to-start}">LINK_TO_START</a>
+        </div>
     </div>
 
     <div th:replace="fragments/footer :: footer"/>
