@@ -26,6 +26,7 @@ public class AccUserEntity {
     private String password;
     private int enabled;
     private Collection<UserRoleEntity> userRolesByUserId;
+    private Collection<BankAccountEntity> bankAccountById;
 
     @Id
     @Column(name = "user_id")
@@ -80,6 +81,8 @@ public class AccUserEntity {
                 Objects.equals(password, that.password);
     }
 
+
+
     @Override
     public int hashCode() {
 
@@ -93,5 +96,14 @@ public class AccUserEntity {
 
     public void setUserRolesByUserId(Collection<UserRoleEntity> userRolesByUserId) {
         this.userRolesByUserId = userRolesByUserId;
+    }
+
+    @OneToMany(mappedBy = "accUserByUserId")
+    public Collection<BankAccountEntity> getBankAccountById() {
+        return bankAccountById;
+    }
+
+    public void setBankAccountById(Collection<BankAccountEntity> bankAccountById) {
+        this.bankAccountById = bankAccountById;
     }
 }

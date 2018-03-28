@@ -1,9 +1,18 @@
 package org.teinelund.application.accounting.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.teinelund.application.accounting.model.BankAccount;
+import org.teinelund.application.accounting.model.BankAccountAdd;
+import org.teinelund.application.accounting.model.User;
+import org.teinelund.application.accounting.services.InvoiceService;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * This controller handles pages that does require an authenticated user.
@@ -14,8 +23,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/invoice")
 public class AuthenticatedController {
 
+    @Autowired
+    private InvoiceService invoiceService;
+
     @RequestMapping(value = "/start", method = RequestMethod.GET)
     public String start(Model model) {
+        List<BankAccount> list = invoiceService.getBankAccounts();
+        model.addAttribute("bankaccounts", list);
+        return "invoice/start";
+    }
+
+    @RequestMapping(value = "/add-bank-account", method = RequestMethod.GET)
+    public String addBankAccount() {
+        return "invoice/add-bank-account";
+    }
+
+    @RequestMapping(value = "/add-bank-account", method = RequestMethod.POST)
+    public String addBankAccountPost(@ModelAttribute(value="bankAccountAdd") BankAccountAdd bankAccountAdd, Model model) {
+        invoiceService.addBankAccount(bankAccountAdd);
+        List<BankAccount> list = invoiceService.getBankAccounts();
+        model.addAttribute("bankaccounts", list);
         return "invoice/start";
     }
 }

@@ -15,6 +15,29 @@
 
         <h1 th:text="#{invoice.start.header}">TITLE</h1>
         <p th:text="#{invoice.start.text}">WELLCOME_TEXT</p>
+
+        <h3 th:text="#{invoice.start.header2}">TITLE_2</h3>
+        <p><span th:text="#{invoice.start.account.add}">ADD_ACCOUNT</span><a href="#" th:href="@{/invoice/add-bank-account}">
+            <img border="0" alt="ADD_BANK_ACCOUNT" src="../../static/icon/credit-card-icons_64x64.png" th:attr="src=@{/icon/credit-card-icons_64x64.png}" width="24" height="24" />
+        </a></p>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col" th:text="#{invoice.start.column.name}">NAME</th>
+                <th scope="col" th:text="#{invoice.start.column.description}">DESCRIPTION</th>
+                <th scope="col" th:text="#{invoice.start.column.edit}">EDIT</th>
+                <th scope="col" th:text="#{invoice.start.column.delete}">DELETE</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="bankaccount : ${bankaccounts}">
+                <td th:text="${bankaccount.name}">NAME</td>
+                <td th:text="${bankaccount.description}">DESCRIPTION</td>
+                <td><img border="0" alt="ADD_BANK_ACCOUNT" src="../../static/icon/edit-pencil-icon_64x64.png" th:attr="src=@{/icon/edit-pencil-icon_64x64.png}" width="24" height="24" /></td>
+                <td><img border="0" alt="ADD_BANK_ACCOUNT" src="../../static/icon/trashcan_64x64.png" th:attr="src=@{/icon/trashcan_64x64.png}" width="24" height="24" /></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 
     <div th:replace="fragments/footer :: footer"/>

@@ -13,7 +13,7 @@ public interface AccUserRepository extends JpaRepository<AccUserEntity, Long> {
      * Get AccUserEntity by user name.
      *
      * @param userName
-     * @return AllowedValues .
+     * @return AccUserEntity
      */
     @Query(name = "AccUserEntity.findByUserName")
     AccUserEntity getAccUserEntityForUserName(@Param("userName") String userName);

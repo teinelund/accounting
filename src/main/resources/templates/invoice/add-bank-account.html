@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+    <title th:text="#{page.title}">TEXT_TITLE</title>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <h1 th:text="#{invoice.add-bank-account.header}">TITLE</h1>
+
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="card border-info mb-3">
+                <div class="card-header">
+                    <img border="0" alt="ADD_BANK_ACCOUNT" src="../../static/icon/credit-card-icons_64x64.png" th:attr="src=@{/icon/credit-card-icons_64x64.png}" width="24" height="24" />
+                    <b><span th:text="#{invoice.add-bank-account.card-header}">BANK_ACCOUNT</span></b>
+                </div>
+                <div class="card-body">
+
+                    <form name="f" th:action="@{/invoice/add-bank-account}" th:object="${bankAccountAdd}" method="post">
+                        <div class="form-group">
+                            <label for="name" th:text="#{invoice.add-bank-account.text}">NAME</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Name" required="false"/> <!-- th:field="*{username}" -->
+                        </div>
+                        <div class="form-group">
+                            <label for="description" th:text="#{invoice.add-bank-account.description}">DESCRIPTION</label>
+                            <input type="text" id="description" name="description" class="form-control" placeholder="Password" required="false"/> <!-- th:field="*{password}" -->
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-lg btn-primary" type="submit" th:text="#{invoice.add-bank-account.button}">ADD</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>
