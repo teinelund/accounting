@@ -33,8 +33,16 @@
             <tr th:each="bankaccount : ${bankaccounts}">
                 <td th:text="${bankaccount.name}">NAME</td>
                 <td th:text="${bankaccount.description}">DESCRIPTION</td>
-                <td><img border="0" alt="ADD_BANK_ACCOUNT" src="../../static/icon/edit-pencil-icon_64x64.png" th:attr="src=@{/icon/edit-pencil-icon_64x64.png}" width="24" height="24" /></td>
-                <td><img border="0" alt="ADD_BANK_ACCOUNT" src="../../static/icon/trashcan_64x64.png" th:attr="src=@{/icon/trashcan_64x64.png}" width="24" height="24" /></td>
+                <td>
+                    <a href="#" th:href="@{/invoice/bank-account/{id}/edit(id=${bankaccount.id})}">
+                    <img border="0" alt="ADD_BANK_ACCOUNT" src="../../static/icon/edit-pencil-icon_64x64.png" th:attr="src=@{/icon/edit-pencil-icon_64x64.png}" width="24" height="24" />
+                    </a>
+                </td>
+                <td>
+                    <a href="#" th:href="@{/invoice/bank-account/{id}/delete(id=${bankaccount.id})}">
+                    <img border="0" alt="ADD_BANK_ACCOUNT" src="../../static/icon/trashcan_64x64.png" th:attr="src=@{/icon/trashcan_64x64.png}" width="24" height="24" />
+                    </a>
+                </td>
             </tr>
             </tbody>
         </table>

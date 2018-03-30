@@ -13,31 +13,32 @@
 
 <div class="container">
 
-    <h1 th:text="#{invoice.add-bank-account.header}">TITLE</h1>
+    <h1 th:text="#{invoice.edit-bank-account.header}">TITLE</h1>
 
     <div class="row">
         <div class="col-md-10 offset-md-1">
             <div class="card border-info mb-3">
                 <div class="card-header">
                     <img border="0" alt="ADD_BANK_ACCOUNT" src="../../static/icon/credit-card-icons_64x64.png" th:attr="src=@{/icon/credit-card-icons_64x64.png}" width="24" height="24" />
-                    <b><span th:text="#{invoice.add-bank-account.card-header}">BANK_ACCOUNT</span></b>
+                    <b><span th:text="#{invoice.edit-bank-account.card-header}">BANK_ACCOUNT</span></b>
                 </div>
                 <div class="card-body">
 
-                    <form name="f" th:action="@{/invoice/add-bank-account}" th:object="${bankAccountAdd}" method="post">
+                    <form name="f" th:action="@{/invoice/edit-bank-account}" th:object="${bankAccount}" method="post">
                         <div class="form-group">
-                            <label for="name" th:text="#{invoice.add-bank-account.text}">TEXT</label>
+                            <label for="name" th:text="#{invoice.edit-bank-account.text}">TEXT</label>
                         </div>
                         <div>
                             <label for="name" th:text="#{invoice.add-bank-account.name}">NAME</label>
-                            <input type="text" id="name" name="name" class="form-control" placeholder="NAME" th:placeholder="#{invoice.add-bank-account.placeholder.name}" required="false"/> <!-- th:field="*{username}" -->
+                            <input type="hidden" id="id" name="id" value="ID" th:value="${bankAccount.id}" />
+                            <input type="text" id="name" name="name" class="form-control" placeholder="NAME" th:placeholcer="#{invoice.add-bank-account.name}" value="NAME" th:value="${bankAccount.name}" required="false"/> <!-- th:field="*{username}" -->
                         </div>
                         <div class="form-group">
                             <label for="description" th:text="#{invoice.add-bank-account.description}">DESCRIPTION</label>
-                            <input type="text" id="description" name="description" class="form-control" placeholder="DESCRIPTION" th:placeholder="#{invoice.add-bank-account.placeholder.description}" required="false"/> <!-- th:field="*{password}" -->
+                            <input type="text" id="description" name="description" class="form-control" placeholder="DESCRIPTION" th:placeholder="#{invoice.add-bank-account.description}" value="DESCRIPTION" th:value="${bankAccount.description}" required="false"/> <!-- th:field="*{password}" -->
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-lg btn-primary" type="submit" th:text="#{invoice.add-bank-account.button}">ADD</button>
+                            <button class="btn btn-lg btn-primary" type="submit" th:text="#{invoice.edit-bank-account.button}">CHANGE </button>
                         </div>
                     </form>
 

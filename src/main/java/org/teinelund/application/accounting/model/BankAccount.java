@@ -3,14 +3,15 @@ package org.teinelund.application.accounting.model;
 public class BankAccount {
     private String name;
     private String description;
-    private String edit;
-    private String delete;
+    private String id;
 
-    public BankAccount(String name, String description, String edit, String delete) {
+    public BankAccount() {
+    }
+
+    public BankAccount(String name, String description, String id) {
         this.name = name;
         this.description = description;
-        this.edit = edit;
-        this.delete = delete;
+        this.id = id;
     }
 
     public String getName() {
@@ -29,19 +30,11 @@ public class BankAccount {
         this.description = description;
     }
 
-    public String getEdit() {
-        return edit;
+    public String getId() {
+        return id;
     }
 
-    public void setEdit(String edit) {
-        this.edit = edit;
-    }
-
-    public String getDelete() {
-        return delete;
-    }
-
-    public void setDelete(String delete) {
-        this.delete = delete;
+    public void setId(String id) {
+        this.id = id;
     }
 }

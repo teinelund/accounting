@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.teinelund.application.accounting.model.BankAccount;
@@ -41,6 +42,29 @@ public class AuthenticatedController {
     @RequestMapping(value = "/add-bank-account", method = RequestMethod.POST)
     public String addBankAccountPost(@ModelAttribute(value="bankAccountAdd") BankAccountAdd bankAccountAdd, Model model) {
         invoiceService.addBankAccount(bankAccountAdd);
+        List<BankAccount> list = invoiceService.getBankAccounts();
+        model.addAttribute("bankaccounts", list);
+        return "invoice/start";
+    }
+
+    @RequestMapping(value = "/bank-account/{id}/delete", method = RequestMethod.GET)
+    public String deleteBankAccount(@PathVariable String id, Model model) {
+        invoiceService.deleteBankAccount(id);
+        List<BankAccount> list = invoiceService.getBankAccounts();
+        model.addAttribute("bankaccounts", list);
+        return "invoice/start";
+    }
+
+    @RequestMapping(value = "/bank-account/{id}/edit", method = RequestMethod.GET)
+    public String editBankAccount(@PathVariable String id, Model model) {
+        BankAccount bankAccount = invoiceService.editBankAccount(id);
+        model.addAttribute("bankAccount", bankAccount);
+        return "invoice/edit-bank-account";
+    }
+
+    @RequestMapping(value = "/edit-bank-account", method = RequestMethod.POST)
+    public String editBankAccountPost(@ModelAttribute(value="bankAccountAdd") BankAccount bankAccount, Model model) {
+        invoiceService.updateBankAccount(bankAccount);
         List<BankAccount> list = invoiceService.getBankAccounts();
         model.addAttribute("bankaccounts", list);
         return "invoice/start";

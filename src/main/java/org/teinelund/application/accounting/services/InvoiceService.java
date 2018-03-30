@@ -42,8 +42,29 @@ public class InvoiceService {
         AccUserEntity accUserEntity = accUserRepository.getAccUserEntityForUserName(user.getUsername());
         Set<BankAccountEntity> set = bankAccountRepository.findBankAccountsByUserId(accUserEntity.getUserId().longValue());
         for (BankAccountEntity bankAccountEntity : set) {
-            list.add(new BankAccount(bankAccountEntity.getName(), bankAccountEntity.getDescription(), "Edit", "delete"));
+            list.add(new BankAccount(bankAccountEntity.getName(), bankAccountEntity.getDescription(), bankAccountEntity.getId().toString()));
         }
         return list;
+    }
+
+    public void deleteBankAccount(String id) {
+        bankAccountRepository.delete(Long.parseLong(id));
+    }
+
+    public BankAccount editBankAccount(String id) {
+        BankAccountEntity bankAccountEntity = bankAccountRepository.findOne(Long.parseLong(id));
+        BankAccount bankAccount = new BankAccount(bankAccountEntity.getName(), bankAccountEntity.getDescription(), bankAccountEntity.getId().toString());
+        return bankAccount;
+    }
+
+    public void updateBankAccount(BankAccount bankAccount) {
+        BankAccountEntity bankAccountEntity = new BankAccountEntity();
+        bankAccountEntity.setName(bankAccount.getName());
+        bankAccountEntity.setDescription(bankAccount.getDescription());
+        bankAccountEntity.setId(new Long(bankAccount.getId()));
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        AccUserEntity accUserEntity = accUserRepository.getAccUserEntityForUserName(user.getUsername());
+        bankAccountEntity.setAccUserByUserId(accUserEntity);
+        bankAccountRepository.save(bankAccountEntity);
     }
 }
