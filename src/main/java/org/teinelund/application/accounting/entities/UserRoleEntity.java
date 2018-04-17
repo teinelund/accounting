@@ -20,7 +20,7 @@ public class UserRoleEntity {
 
     @Id
     @Column(name = "id", nullable = false)
-    @SequenceGenerator(name="user_role_seq", sequenceName="user_role_id_seq")
+    @SequenceGenerator(name="user_role_seq", sequenceName="user_role_id_seq", allocationSize=1)
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="user_role_seq")
     public Long getId() {
         return id;
@@ -45,7 +45,7 @@ public class UserRoleEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     public AccUserEntity getAccUserByUserId() {
         return accUserByUserId;
     }
@@ -55,7 +55,7 @@ public class UserRoleEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "role_id", nullable = false)
+    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
     public AccRoleEntity getAccRoleByRoleId() {
         return accRoleByRoleId;
     }

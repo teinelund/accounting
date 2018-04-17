@@ -29,7 +29,7 @@ public class BankAccountEntity {
 
     @Id
     @Column(name = "id")
-    @SequenceGenerator(name="bank_account_seq", sequenceName="bank_account_id_seq")
+    @SequenceGenerator(name="bank_account_seq", sequenceName="bank_account_id_seq", allocationSize=1)
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="bank_account_seq")
     public Long getId() {
         return id;
@@ -60,7 +60,7 @@ public class BankAccountEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "fk_acc_user_id", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "fk_acc_user_id", referencedColumnName = "id", nullable = false)
     public AccUserEntity getAccUserByUserId() {
         return accUserByUserId;
     }

@@ -24,13 +24,13 @@ public class AccUserEntity {
     private Long userId;
     private String userName;
     private String password;
-    private int enabled;
+    private short enabled;
     private Collection<UserRoleEntity> userRolesByUserId;
     private Collection<BankAccountEntity> bankAccountById;
 
     @Id
-    @Column(name = "user_id")
-    @SequenceGenerator(name="acc_user_seq", sequenceName="acc_user_user_id_seq")
+    @Column(name = "id")
+    @SequenceGenerator(name="acc_user_seq", sequenceName="acc_user_id_seq", allocationSize=1)
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="acc_user_seq")
     public Long getUserId() {
         return userId;
@@ -41,7 +41,7 @@ public class AccUserEntity {
     }
 
     @Basic
-    @Column(name = "user_name")
+    @Column(name = "name")
     public String getUserName() {
         return userName;
     }
@@ -62,11 +62,11 @@ public class AccUserEntity {
 
     @Basic
     @Column(name = "enabled")
-    public int getEnabled() {
+    public short getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(int enabled) {
+    public void setEnabled(short enabled) {
         this.enabled = enabled;
     }
 

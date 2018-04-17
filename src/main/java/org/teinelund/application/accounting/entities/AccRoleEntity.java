@@ -20,8 +20,8 @@ public class AccRoleEntity {
     private Collection<UserRoleEntity> userRolesByRoleId;
 
     @Id
-    @Column(name = "role_id", nullable = false)
-    @SequenceGenerator(name="acc_role_seq", sequenceName="acc_role_role_id_seq")
+    @Column(name = "id", nullable = false)
+    @SequenceGenerator(name="acc_role_seq", sequenceName="acc_role_id_seq", allocationSize=1)
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="acc_role_seq")
     public Long getRoleId() {
         return roleId;
@@ -32,7 +32,7 @@ public class AccRoleEntity {
     }
 
     @Basic
-    @Column(name = "role_name", nullable = false, length = 30)
+    @Column(name = "name", nullable = false, length = 30)
     public String getRoleName() {
         return roleName;
     }

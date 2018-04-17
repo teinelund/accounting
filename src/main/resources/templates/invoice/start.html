@@ -6,6 +6,13 @@
 <head>
     <div th:replace="fragments/header :: header-css"/>
     <title th:text="#{page.title}">TEXT_TITLE</title>
+    <script>
+        $(document).ready(function(){
+            $("p").click(function(){
+                $(this).hide();
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -31,7 +38,7 @@
             </thead>
             <tbody>
             <tr th:each="bankaccount : ${bankaccounts}">
-                <td th:text="${bankaccount.name}">NAME</td>
+                <td id="name-50" th:id="${'name-' + bankaccount.id}" th:text="${bankaccount.name}">NAME</td>
                 <td th:text="${bankaccount.description}">DESCRIPTION</td>
                 <td>
                     <a href="#" th:href="@{/invoice/bank-account/{id}/edit(id=${bankaccount.id})}">
@@ -39,8 +46,14 @@
                     </a>
                 </td>
                 <td>
-                    <a href="#" th:href="@{/invoice/bank-account/{id}/delete(id=${bankaccount.id})}">
+                    <!-- href="#" th:href="@{/invoice/bank-account/{id}/delete(id=${bankaccount.id})}" -->
+                    <!--
+                    <a data-toggle="modal" data-target="#deleteModalCenter">
                     <img border="0" alt="ADD_BANK_ACCOUNT" src="../../static/icon/trashcan_64x64.png" th:attr="src=@{/icon/trashcan_64x64.png}" width="24" height="24" />
+                    </a>
+                    -->
+                    <a id="50" th:id="${bankaccount.id}" class="deleteButton">
+                        <img border="0" alt="DELETE_BANK_ACCOUNT" src="/Users/henrikstd/Dropbox/Develop/java/spring/accounting/src/main/resources/static/icon/trashcan_64x64.png" th:attr="src=@{/icon/trashcan_64x64.png}" width="24" height="24" />
                     </a>
                 </td>
             </tr>
@@ -48,6 +61,45 @@
         </table>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLongTitle" th:text="#{invoice.start.modal.dialog.title}">DELETE_MODAL_DIALOG_TITLE</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <span th:text="#{invoice.start.modal.dialog.text1}">ARE_YOU_SURE_YOU_WANT_TO_DELETE</span>
+                    <span id="modal-body-account-card-name">TEXT</span>
+                    <span th:text="#{invoice.start.modal.dialog.text2}">?</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{invoice.start.modal.dialog.secondary}">CANCLE</button>
+                    <a role="button" id="modal-dialog-primary-btn" class="btn btn-primary" th:text="#{invoice.start.modal.dialog.primary}">DELETE</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div th:replace="fragments/footer :: footer"/>
+
+    <script>
+        $(document).ready(function(){
+            var $modal = $('.modal').modal({
+                show: false
+            });
+
+            $('.deleteButton').on('click', function() {
+                var name = $('#name-'+this.id).text()
+                $('#modal-body-account-card-name').html(name);
+                $("#modal-dialog-primary-btn").attr("href", "/invoice/bank-account/" + this.id + "/delete");
+                $modal.modal('show');
+            });
+
+        })
+    </script>
 </body>
 </html>

@@ -38,7 +38,7 @@ public class RegisterService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(user.getPassword());
         accUser.setPassword(hashedPassword);
-        accUser.setEnabled(1);
+        accUser.setEnabled((short) 1);
         Collection<UserRoleEntity> userRoles = new LinkedList<>();
         AccRoleEntity accRole = accRoleRepository.getOne(ROLE_USER);
         UserRoleEntity userRole = new UserRoleEntity();
