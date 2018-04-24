@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.teinelund.application.accounting.model.BankAccount;
 import org.teinelund.application.accounting.model.BankAccountAdd;
+import org.teinelund.application.accounting.model.Invoice;
 import org.teinelund.application.accounting.model.User;
 import org.teinelund.application.accounting.services.InvoiceService;
 
@@ -68,5 +69,13 @@ public class AuthenticatedController {
         List<BankAccount> list = invoiceService.getBankAccounts();
         model.addAttribute("bankaccounts", list);
         return "invoice/start";
+    }
+
+    // @{/invoice/bank-account/{id}/balance(id=${bankaccount.id})}
+    @RequestMapping(value = "/bank-account/{id}/balance", method = RequestMethod.GET)
+    public String balance(@PathVariable String id, Model model) {
+        List<Invoice> list = invoiceService.getInvoices(id);
+        model.addAttribute("invoices", list);
+        return "invoice/balance-bank-account";
     }
 }

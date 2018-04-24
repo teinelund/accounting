@@ -38,7 +38,9 @@
             </thead>
             <tbody>
             <tr th:each="bankaccount : ${bankaccounts}">
-                <td id="name-50" th:id="${'name-' + bankaccount.id}" th:text="${bankaccount.name}">NAME</td>
+                <td id="name-50" th:id="${'name-' + bankaccount.id}">
+                    <a href="#" th:href="@{/invoice/bank-account/{id}/balance(id=${bankaccount.id})}"><span th:text="${bankaccount.name}">NAME</span></a>
+                </td>
                 <td th:text="${bankaccount.description}">DESCRIPTION</td>
                 <td>
                     <a href="#" th:href="@{/invoice/bank-account/{id}/edit(id=${bankaccount.id})}">

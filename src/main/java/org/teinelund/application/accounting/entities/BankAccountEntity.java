@@ -11,8 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.util.Collection;
 
 @Entity
 @Table(name = "bank_account", schema = "public", catalog = "accounting")
@@ -26,6 +28,7 @@ public class BankAccountEntity {
     private String name;
     private String description;
     private AccUserEntity accUserByUserId;
+    private Collection<InvoiceEntity> invoiceById;
 
     @Id
     @Column(name = "id")
@@ -67,5 +70,14 @@ public class BankAccountEntity {
 
     public void setAccUserByUserId(AccUserEntity accUserByUserId) {
         this.accUserByUserId = accUserByUserId;
+    }
+
+    @OneToMany(mappedBy = "bankAccount")
+    public Collection<InvoiceEntity> getUserRolesByUserId() {
+        return invoiceById;
+    }
+
+    public void setUserRolesByUserId(Collection<InvoiceEntity> invoiceById) {
+        this.invoiceById = invoiceById;
     }
 }

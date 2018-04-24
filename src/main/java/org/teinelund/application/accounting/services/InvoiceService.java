@@ -6,10 +6,13 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.teinelund.application.accounting.entities.AccUserEntity;
 import org.teinelund.application.accounting.entities.BankAccountEntity;
+import org.teinelund.application.accounting.entities.InvoiceEntity;
 import org.teinelund.application.accounting.model.BankAccount;
 import org.teinelund.application.accounting.model.BankAccountAdd;
+import org.teinelund.application.accounting.model.Invoice;
 import org.teinelund.application.accounting.repository.AccUserRepository;
 import org.teinelund.application.accounting.repository.BankAccountRepository;
+import org.teinelund.application.accounting.repository.InvoiceRepository;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -23,6 +26,9 @@ public class InvoiceService {
 
     @Autowired
     private AccUserRepository accUserRepository;
+
+    @Autowired
+    private InvoiceRepository invoiceRepository;
 
     public void addBankAccount(BankAccountAdd bankAccountAdd) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -66,5 +72,25 @@ public class InvoiceService {
         AccUserEntity accUserEntity = accUserRepository.getAccUserEntityForUserName(user.getUsername());
         bankAccountEntity.setAccUserByUserId(accUserEntity);
         bankAccountRepository.save(bankAccountEntity);
+    }
+
+    public List<Invoice> getInvoices(String id) {
+        List<Invoice> list = new LinkedList<>();
+        Set<InvoiceEntity> set = invoiceRepository.findInvoicesByBankAccountId(Long.parseLong(id));
+        for (InvoiceEntity invoice : set) {
+            list.add(
+                    new Invoice.Builder().
+                            setName(invoice.getName()).
+                            setGiroName(invoice.getGiro().getName()).
+                            setGiroNumber(invoice.getGiro().getGironumber()).
+                            setGiroType(invoice.getGiro().getGiroType().toString()).
+                            setAmount(invoice.getAmount()).
+                            setOcrNumber(invoice.getOcr().getGironumber()).
+                            setPayDate(invoice.getPayDate()).
+                            build()
+                            );
+
+        }
+        return list;
     }
 }

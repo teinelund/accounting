@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+    <div th:replace="fragments/header :: header-css"/>
+    <title th:text="#{page.title}">TEXT_TITLE</title>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <h1 th:text="#{invoice.balance-bank-account.header}">TITLE</h1>
+
+
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>
